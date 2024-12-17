@@ -156,6 +156,11 @@ app.get('/protected', (req, res) => {
 const itemRoutes = require('./api/items');
 app.use('/api/items', itemRoutes);
 
+app.use(express.static("./frontend/build"));
+app.get("*",(req,res)=>{
+  res.sendFile(path.join(__dirname,"frontend/build/index.html"));
+})
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
